@@ -48,6 +48,7 @@ public class addOrni extends AppCompatActivity {
 
         bOK = (Button) findViewById(R.id.button5) ;
 
+        // add a button to add a ornithologue into the database
         bOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,8 +60,6 @@ public class addOrni extends AppCompatActivity {
 
                 Spinner spinnerCanton= (Spinner) findViewById(R.id.editText4);
                 String canton = spinnerCanton.getSelectedItem().toString();
-
-
 
                 rDB.createOrnitho(tusername.getText().toString(),
                         tpassword.getText().toString() ,

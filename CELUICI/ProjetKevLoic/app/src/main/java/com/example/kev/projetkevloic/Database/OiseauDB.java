@@ -45,6 +45,7 @@ public class OiseauDB {
         dbHelper.close();
     }
 
+    // create a birds
     public void createOiseau(String nom, String color, String poids, String taille, String text){
 
         open();
@@ -63,7 +64,7 @@ public class OiseauDB {
         close();
     }
 
-
+    // delete the bird
     public void deleteOiseau(Oiseau o){
         long id = o.getId();
         open();
@@ -71,6 +72,7 @@ public class OiseauDB {
         close();
     }
 
+    // delete a bird from one ID
     public void deleteOiseau(int o){
         open();
         Log.d("---", o+"");
@@ -78,7 +80,7 @@ public class OiseauDB {
         close();
     }
 
-
+    // create a List of all the birds
     public List<Oiseau> getAllOiseaux(){
 
         open();
@@ -107,8 +109,7 @@ public class OiseauDB {
         return oiseaux;
     }
 
-
-
+    // count the number of birds - never use
     public int getOiseauCount(){
         String countQuery = "SELECT * FROM " + DatabaseHelper.TABLE_OISEAU;
         open();
@@ -121,6 +122,7 @@ public class OiseauDB {
         return cursor.getCount();
     }
 
+    // update a birds
     public void updateOiseau(Oiseau oiseau){
         open();
         ContentValues values = new ContentValues();
@@ -139,6 +141,7 @@ public class OiseauDB {
         close();
     }
 
+    // get the birds by their ID
     Oiseau getOiseau(int id){
         open();
         Cursor cursor = database.query(DatabaseHelper.TABLE_OISEAU, allColumns , DatabaseHelper.OISEAU_ID + "=?",
@@ -154,24 +157,7 @@ public class OiseauDB {
 
     }
 
-    public int findColor(String c) {
-        Log.d(c,c);
-
-        String[] colorss = new String[]{"inconnu", "rouge", "bleu", "vert", "jaune", "brun", "gris", "noir", "blanc"};
-
-
-        int temp = 0;
-        for (String i : colorss) {
-            if (i.equals(c)) {
-                Log.d("OK","RECHECOK");
-                return temp;
-            }
-            temp++;
-        }
-        return 0;
-
-    }
-
+    // create a List of the name of birds
     public ArrayList<String> getAllOiseauxName(){
 
         open();
@@ -192,7 +178,7 @@ public class OiseauDB {
         return nameOiseaux;
     }
 
-
+    // get the id if we give the name
     public int getIdByName(String name){
         open();
 
@@ -214,6 +200,7 @@ public class OiseauDB {
         return ret;
 
     }
+
 
 
 }

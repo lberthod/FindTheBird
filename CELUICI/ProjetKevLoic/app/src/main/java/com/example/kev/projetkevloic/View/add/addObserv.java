@@ -66,7 +66,7 @@ public class addObserv extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 EditText tOiseau , Ttext;
-                finish();
+
                 Spinner mySpinner= (Spinner) findViewById(R.id.editText);
                 String oiseau = mySpinner.getSelectedItem().toString();
 
@@ -76,6 +76,7 @@ public class addObserv extends AppCompatActivity {
 
                 Intent intent = new Intent(addObserv.this , HomeObservations.class);
                 intent.putExtra("ID_USER" , ID_USER);
+                finish();
                 startActivity(intent);
 
             }

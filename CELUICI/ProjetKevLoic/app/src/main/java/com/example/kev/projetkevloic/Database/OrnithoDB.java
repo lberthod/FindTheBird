@@ -42,7 +42,6 @@ public class OrnithoDB {
     public void close() {dbHelper.close();}
 
     public void createOrnitho(String username, String password, String age, String canton) {
-
         open();
 
         ContentValues values = new ContentValues();
@@ -51,7 +50,6 @@ public class OrnithoDB {
         values.put(DatabaseHelper.ORNITHO_PASSWORD, password);
         values.put(DatabaseHelper.ORNITHO_AGE, age);
         values.put(DatabaseHelper.ORNITHO_CANTON, canton);
-
 
         database.insert(DatabaseHelper.TABLE_ORNITHO, null, values);
 
@@ -64,8 +62,8 @@ public class OrnithoDB {
         close();
     }
 
+    // create a list of all ornithologues
     public List<Ornithologue> getAllOrnithos() {
-
         open();
 
         List<Ornithologue> ornithologues = new ArrayList<Ornithologue>();
@@ -91,6 +89,7 @@ public class OrnithoDB {
         return ornithologues;
     }
 
+    // count the number of ornitho - never use
     public int getOrnithoCount() {
         String countQuery = "SELECT * FROM " + DatabaseHelper.TABLE_ORNITHO;
         open();
@@ -103,6 +102,7 @@ public class OrnithoDB {
         return cursor.getCount();
     }
 
+    // modifiy the values of the ornithologue
     public void updateOrnitho(Ornithologue ornithologue) {
         open();
         ContentValues values = new ContentValues();
@@ -118,6 +118,7 @@ public class OrnithoDB {
         close();
     }
 
+    // get the ornitologue by the ID
     public Ornithologue getOrnitho(int id) {
         open();
         Cursor cursor = database.query(DatabaseHelper.TABLE_ORNITHO, allColumns, DatabaseHelper.ORNITHO_ID + "=?",
@@ -133,9 +134,8 @@ public class OrnithoDB {
 
     }
 
+    // find the position for the canton into the spinner
     public int findCanton(String c) {
-        Log.d(c, c);
-
 
         int temp = 0;
         for (String i : cantons) {
@@ -148,6 +148,7 @@ public class OrnithoDB {
 
     }
 
+    // verify the username and the password and give the ID
     public int checkOrnitho(String username , String password)
     {
         int id=-1;

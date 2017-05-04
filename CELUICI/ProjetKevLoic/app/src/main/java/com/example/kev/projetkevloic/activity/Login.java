@@ -54,31 +54,21 @@ public class Login extends AppCompatActivity {
                 Intent intent = new Intent(Login.this, addOrni.class);
                 startActivity(intent);
 
-
             }
         });
-
-
 
 
     }
 
     public void goLogin (View view) {
-
         finish();
-
-
         Intent intent = new Intent(Login.this, MainActivity.class);
-
     }
 
 
 
     public void Register (View view) {
-
         finish();
-
-
         Intent intent = new Intent(Login.this, addOrni.class);
 
     }

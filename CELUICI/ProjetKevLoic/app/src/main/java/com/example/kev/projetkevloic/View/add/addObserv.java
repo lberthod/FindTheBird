@@ -79,6 +79,7 @@ public class addObserv extends AppCompatActivity {
                 finish();
                 startActivity(intent);
 
+
             }
         });
     }

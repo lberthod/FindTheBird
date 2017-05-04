@@ -201,6 +201,24 @@ public class OiseauDB {
 
     }
 
+    // find the position of the color into the spinner
+    public int findColor(String c) {
+        Log.d(c,c);
+
+        String[] colorss = new String[]{"inconnu", "rouge", "bleu", "vert", "jaune", "brun", "gris", "noir", "blanc"};
+
+
+        int temp = 0;
+        for (String i : colorss) {
+            if (i.equals(c)) {
+                Log.d("OK","RECHECOK");
+                return temp;
+            }
+            temp++;
+        }
+        return 0;
+
+    }
 
 
 }

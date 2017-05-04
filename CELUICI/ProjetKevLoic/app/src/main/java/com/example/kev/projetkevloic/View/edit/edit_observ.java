@@ -13,6 +13,7 @@ import com.example.kev.projetkevloic.Database.ObserverDB;
 import com.example.kev.projetkevloic.R;
 import com.example.kev.projetkevloic.View.home.HomeObservations;
 import com.example.kev.projetkevloic.View.home.HomeOiseaux;
+import com.example.kev.projetkevloic.View.home.HomeOrnithologue;
 import com.example.kev.projetkevloic.object.Observation;
 
 /**
@@ -89,5 +90,11 @@ public class edit_observ extends AppCompatActivity {
     }
 
 
-    public void Retour (View view) {finish();}
+    public void Retour (View view) {
+        Intent intent = new Intent(edit_observ.this, HomeObservations.class);
+        intent.putExtra("ID_USER" , ID_USER);
+
+        finish();
+        startActivity(intent);
+    }
 }

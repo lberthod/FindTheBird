@@ -94,17 +94,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+               />
 
-            <EditText
+            <Spinner
                 android:id="@+id/editText2"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                />
 
             <EditText
                 android:id="@+id/editText3"
@@ -112,8 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                 />
 
             <EditText
                 android:id="@+id/editText4"
@@ -121,8 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="45dp"
                 android:ems="10"
-                android:inputType="textPassword"
-                android:text="Name" />
+                />
 
 
             <Button
@@ -130,7 +126,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="33dp"
+                android:layout_marginTop="55dp"
                 android:background="@android:color/holo_orange_dark"
                 android:text="@string/ok"
                 android:textColor="@android:color/white" />

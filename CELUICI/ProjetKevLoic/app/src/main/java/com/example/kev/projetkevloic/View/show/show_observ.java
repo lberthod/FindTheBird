@@ -25,7 +25,7 @@ public class show_observ extends AppCompatActivity  {
 
     ObserverDB bDB = new ObserverDB(this);
 
-    private int id , orni, oiseau;
+    int id , orni, oiseau;
     private String text, orniN, oiseauN;
     private int ID_USER;
 
@@ -46,6 +46,12 @@ public class show_observ extends AppCompatActivity  {
      id = intent.getIntExtra("id",0);
      ID_USER = intent.getIntExtra("ID_USER",0);
 
+
+        if(ID_USER != orni){
+            Button butEdit;
+            butEdit = (Button) findViewById(R.id.button6);
+            butEdit.setVisibility(View.INVISIBLE);
+        }
 
         //Set the title into the textview
     TextView txtLblOrni = (TextView) findViewById(R.id.textView1);
@@ -69,18 +75,21 @@ public class show_observ extends AppCompatActivity  {
         txtText.setText(text);
 }
 
-    public void Retour (View view) {
-                finish();
-    }
+    public void Retour(View view) {
+        Intent intent = new Intent(show_observ.this, HomeObservations.class);
+        intent.putExtra("ID_USER" , ID_USER);
 
+        finish();
+        startActivity(intent);
+    }
     public void modifier (View view) {
 
         // take the values after modifications
         TextView txtOrni = (TextView) findViewById(R.id.textView4);
-        String orni = txtOrni.getText().toString();
+        String orni_ = txtOrni.getText().toString();
 
         TextView txtOiseau = (TextView) findViewById(R.id.textView5);
-        String oiseau = txtOiseau.getText().toString();
+        String oiseau_ = txtOiseau.getText().toString();
 
         TextView txtText = (TextView) findViewById(R.id.textView6);
         String text = txtText.getText().toString();
@@ -101,7 +110,10 @@ public class show_observ extends AppCompatActivity  {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.delete_menu, menu);
+        if(ID_USER == orni){
+            getMenuInflater().inflate(R.menu.delete_menu, menu);
+
+        }
         return super.onCreateOptionsMenu(menu);
     }
 

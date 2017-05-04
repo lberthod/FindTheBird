@@ -80,8 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+               />
 
             <TextView
                 android:id="@+id/editText2"
@@ -89,8 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="65dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+             />
 
             <EditText
                 android:id="@+id/editText3"
@@ -98,8 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+              />
 
             <Button
                 android:id="@+id/butOK"

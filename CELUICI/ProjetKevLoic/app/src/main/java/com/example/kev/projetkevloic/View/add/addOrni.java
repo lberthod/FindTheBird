@@ -42,9 +42,9 @@ public class addOrni extends AppCompatActivity {
         }
         Spinner spinnerCantons = (Spinner) findViewById(R.id.editText4);
 
-        ArrayAdapter<String> adapteroiseauName = new ArrayAdapter<String>
+        ArrayAdapter<String> adapterCantonName = new ArrayAdapter<String>
                 (this, android.R.layout.simple_spinner_item, cantons);
-        spinnerCantons.setAdapter(adapteroiseauName);
+        spinnerCantons.setAdapter(adapterCantonName);
 
         bOK = (Button) findViewById(R.id.button5) ;
 

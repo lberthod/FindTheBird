@@ -5,15 +5,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.kev.projetkevloic.Database.OiseauDB;
 import com.example.kev.projetkevloic.Database.OrnithoDB;
 import com.example.kev.projetkevloic.R;
 import com.example.kev.projetkevloic.View.home.HomeOrnithologue;
+import com.example.kev.projetkevloic.View.show.show_ornitho;
 import com.example.kev.projetkevloic.object.Ornithologue;
+
+import java.util.ArrayList;
 
 public class edit_ornitho extends AppCompatActivity {
 
@@ -34,13 +39,15 @@ public class edit_ornitho extends AppCompatActivity {
         butOK.setOnClickListener(new View.OnClickListener() {
 
             @Override public void onClick(View v) {
-                EditText tusername , tpassword, tage ,tcanton;
+                EditText tusername , tpassword, tage;
 
                 // take the values in the editexts from the layout
                 tusername =  (EditText)  findViewById(R.id.editText1);
                 tpassword =  (EditText)  findViewById(R.id.editText4);
                 tage =  (EditText)  findViewById(R.id.editText3);
-                tcanton =  (EditText)  findViewById(R.id.editText2);
+
+                Spinner spinnerCanton= (Spinner) findViewById(R.id.editText2);
+                String tcanton = spinnerCanton.getSelectedItem().toString();
 
                 // create a ornitho and add values
                 Ornithologue o = new Ornithologue();
@@ -49,7 +56,7 @@ public class edit_ornitho extends AppCompatActivity {
                 o.setUsername(tusername.getText().toString());
                 o.setPassword(tpassword.getText().toString());
                 o.setAge(tage.getText().toString());
-                o.setCanton(tcanton.getText().toString());
+                o.setCanton(tcanton);
 
                 // update the ornitho into the db
                 rDB.updateOrnitho(o);
@@ -73,6 +80,9 @@ public class edit_ornitho extends AppCompatActivity {
         id = intent.getStringExtra("id");
         ID_USER = intent.getIntExtra("ID_USER",0);
 
+
+
+
         //Set the labels
         TextView txtLblNom = (TextView) findViewById(R.id.textView1);
         txtLblNom.setText(R.string.username);
@@ -90,8 +100,15 @@ public class edit_ornitho extends AppCompatActivity {
         EditText txtUsername = (EditText) findViewById(R.id.editText1);
         txtUsername.setText(username);
 
-        EditText txtCanton = (EditText) findViewById(R.id.editText2);
-        txtCanton.setText(canton);
+        ArrayList<String> cantons = new ArrayList<String>() ;
+        for (String c : rDB.cantons){
+            cantons.add(c);
+        }
+        Spinner spinnerCantons = (Spinner) findViewById(R.id.editText2);
+
+        ArrayAdapter<String> adapterCantonName = new ArrayAdapter<String>
+                (this, android.R.layout.simple_spinner_item, cantons);
+        spinnerCantons.setAdapter(adapterCantonName);
 
         EditText txtAge = (EditText) findViewById(R.id.editText3);
         txtAge.setText(age);
@@ -101,6 +118,11 @@ public class edit_ornitho extends AppCompatActivity {
     }
 
 
-    public void Retour (View view) {finish();
+    public void Retour (View view) {
+        Intent intent = new Intent(edit_ornitho.this, HomeOrnithologue.class);
+        intent.putExtra("ID_USER" , ID_USER);
+
+        finish();
+        startActivity(intent);
     }
 }

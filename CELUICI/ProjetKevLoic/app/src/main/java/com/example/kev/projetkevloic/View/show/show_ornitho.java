@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.example.kev.projetkevloic.R;
 import com.example.kev.projetkevloic.View.edit.edit_ornitho;
+import com.example.kev.projetkevloic.View.home.HomeOiseaux;
+import com.example.kev.projetkevloic.View.home.HomeOrnithologue;
 
 public class show_ornitho extends AppCompatActivity {
     private String idf;
@@ -75,14 +77,19 @@ public class show_ornitho extends AppCompatActivity {
 
     }
 
-    public void Retour (View view) {
+    public void Retour(View view) {
+        Intent intent = new Intent(show_ornitho.this, HomeOrnithologue.class);
+        intent.putExtra("ID_USER" , ID_USER);
+
         finish();
+        startActivity(intent);
     }
 
     public void edit (View view) {
 
         // create intent to go in the editOrnitho_class
         Intent intent = new Intent(show_ornitho.this, edit_ornitho.class);
+        finish();
 
         // take the values
         TextView txtUsername = (TextView) findViewById(R.id.textView4);

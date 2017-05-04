@@ -88,14 +88,19 @@ public class show_oiseau extends AppCompatActivity {
     }
 
     public void Retour(View view) {
+        Intent intent = new Intent(show_oiseau.this, HomeOiseaux.class);
+        intent.putExtra("ID_USER" , ID_USER);
+
         finish();
+        startActivity(intent);
     }
 
     public void Modify(View view) {
 
-        // create intent to go in the editObserv_class
+        // create intent to go in the editOiseau_class
 
         Intent intent = new Intent(show_oiseau.this, edit_oiseau.class);
+        finish();
 
         // take the informations and add to the intent
         TextView txtNom = (TextView) findViewById(R.id.textView6);
@@ -117,8 +122,11 @@ public class show_oiseau extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.delete_menu, menu);
+        if(ID_USER == 1) {
+            getMenuInflater().inflate(R.menu.delete_menu, menu);
+        }
         return super.onCreateOptionsMenu(menu);
+
     }
 
     public String getIdf() {
@@ -131,21 +139,25 @@ public class show_oiseau extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
-        switch (item.getItemId()) {
-            case R.id.butDelete:
 
-                // create a intent to go to home with and delete a bird
-                intent = new Intent(this, HomeOiseaux.class);
-                int ID = Integer.parseInt(idf);
-                oDB = new OiseauDB(this);
-                oDB.deleteOiseau(ID);
-                intent.putExtra("ID_USER" , ID_USER);
-                this.startActivity(intent);
+            switch (item.getItemId()) {
+                case R.id.butDelete:
 
-                break;
+                    // create a intent to go to home with and deletation of  a bird
+                    intent = new Intent(this, HomeOiseaux.class);
+                    finish();
 
-            default:
-                return super.onOptionsItemSelected(item);
+                    int ID = Integer.parseInt(idf);
+                    oDB = new OiseauDB(this);
+                    oDB.deleteOiseau(ID);
+                    intent.putExtra("ID_USER", ID_USER);
+                    this.startActivity(intent);
+
+                    break;
+
+                default:
+                    return super.onOptionsItemSelected(item);
+
         }
 
         return true;

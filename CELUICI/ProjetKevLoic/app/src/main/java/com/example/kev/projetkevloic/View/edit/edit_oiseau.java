@@ -16,6 +16,7 @@ import com.example.kev.projetkevloic.Database.OiseauDB;
 import com.example.kev.projetkevloic.R;
 import com.example.kev.projetkevloic.View.add.addOiseau;
 import com.example.kev.projetkevloic.View.home.HomeOiseaux;
+import com.example.kev.projetkevloic.View.home.HomeOrnithologue;
 import com.example.kev.projetkevloic.object.Oiseau;
 
 import java.util.ArrayList;
@@ -135,7 +136,11 @@ public class edit_oiseau extends AppCompatActivity {
     }
 
     public void Retour (View view) {
+        Intent intent = new Intent(edit_oiseau.this, HomeOiseaux.class);
+        intent.putExtra("ID_USER" , ID_USER);
+
         finish();
+        startActivity(intent);
     }
 
 }

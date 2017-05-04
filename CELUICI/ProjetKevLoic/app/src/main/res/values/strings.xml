@@ -36,6 +36,10 @@
     <string name="observations">Observations</string>
     <string name="oiseaux">Oiseaux</string>
     <string name="ornithologue">Ornithologue</string>
+    <string name="Orni">Orni :</string>
+    <string name="oiseau">Oiseau :</string>
+    <string name="Text">Text :</string>
+    <string name="descritpion">Description :</string>
 
 
 </resources>

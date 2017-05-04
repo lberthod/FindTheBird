@@ -27,6 +27,7 @@ public class show_observ extends AppCompatActivity  {
 
     private int id , orni, oiseau;
     private String text, orniN, oiseauN;
+    private int ID_USER;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,25 +44,22 @@ public class show_observ extends AppCompatActivity  {
      orniN = intent.getStringExtra("orniName");
      oiseauN = intent.getStringExtra("oiseauName");
      id = intent.getIntExtra("id",0);
-        Log.d("-------------", id+"");
+     ID_USER = intent.getIntExtra("ID_USER",0);
 
 
-
-
-    //Set the values
+        //Set the title into the textview
     TextView txtLblOrni = (TextView) findViewById(R.id.textView1);
-    txtLblOrni.setText("Orni : ");
+    txtLblOrni.setText(R.string.Orni);
 
     TextView txtLblOiseau = (TextView) findViewById(R.id.textView2);
-    txtLblOiseau.setText("Oiseau : ");
+    txtLblOiseau.setText(R.string.oiseau);
 
     TextView txtLblText = (TextView) findViewById(R.id.textView3);
-        txtLblText.setText("Text : ");
+        txtLblText.setText(R.string.Text);
 
 
-
-
-    TextView txtOrni = (TextView) findViewById(R.id.textView4);
+        // set tue values from the intent into the textview
+        TextView txtOrni = (TextView) findViewById(R.id.textView4);
         txtOrni.setText(orniN);
 
     TextView txtOiseau = (TextView) findViewById(R.id.textView5);
@@ -69,10 +67,7 @@ public class show_observ extends AppCompatActivity  {
 
     TextView txtText = (TextView) findViewById(R.id.textView6);
         txtText.setText(text);
-
-
 }
-
 
     public void Retour (View view) {
                 finish();
@@ -80,11 +75,7 @@ public class show_observ extends AppCompatActivity  {
 
     public void modifier (View view) {
 
-        // CONTROLER ICI
-
-
-        Intent intent = new Intent(show_observ.this, edit_observ.class);
-
+        // take the values after modifications
         TextView txtOrni = (TextView) findViewById(R.id.textView4);
         String orni = txtOrni.getText().toString();
 
@@ -94,6 +85,8 @@ public class show_observ extends AppCompatActivity  {
         TextView txtText = (TextView) findViewById(R.id.textView6);
         String text = txtText.getText().toString();
 
+        // create a intent to move to edit and add values
+        Intent intent = new Intent(show_observ.this, edit_observ.class);
 
         intent.putExtra("orni", orni);
         intent.putExtra("oiseau",oiseau);
@@ -101,6 +94,7 @@ public class show_observ extends AppCompatActivity  {
         intent.putExtra("id", id );
         intent.putExtra("oiseauName" , oiseauN );
         intent.putExtra("orniName" , orniN);
+        intent.putExtra("ID_USER" , ID_USER);
 
         startActivity(intent);
     }
@@ -117,6 +111,7 @@ public class show_observ extends AppCompatActivity  {
             case R.id.butDelete:
                 intent = new Intent(this, HomeObservations.class);
                 bDB.deleteObservation(id);
+                intent.putExtra("ID_USER" , ID_USER);
                 this.startActivity(intent);
                 break;
 

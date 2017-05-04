@@ -14,7 +14,6 @@ import com.example.kev.projetkevloic.R;
 import com.example.kev.projetkevloic.View.edit.edit_ornitho;
 
 public class show_ornitho extends AppCompatActivity {
-    String password = "";
     private String idf;
     private int ID_USER ;
 
@@ -43,10 +42,9 @@ public class show_ornitho extends AppCompatActivity {
         setIdf(String.valueOf(id_));
 
         ID_USER  = intent.getIntExtra("ID_USER", 0);
-        Log.d("ID_ORNITHI : ", ID_USER+"");
 
         // check if the user is the user, if yes we can edit
-        if(id_ != ID_USER || ID_USER == 1){
+        if(id_ != ID_USER ){
             Button butEdit;
             butEdit = (Button) findViewById(R.id.button10);
 
@@ -54,17 +52,18 @@ public class show_ornitho extends AppCompatActivity {
         }
 
 
-        //Set the values
+        //Set the title into the textview
         TextView txtLblNom = (TextView) findViewById(R.id.textView1);
-        txtLblNom.setText("Nom : ");
+        txtLblNom.setText(R.string.nom);
 
         TextView txtLblCanton = (TextView) findViewById(R.id.textView2);
-        txtLblCanton.setText("Canton : ");
+        txtLblCanton.setText(R.string.canton);
 
         TextView txtLblAge = (TextView) findViewById(R.id.textView3);
-        txtLblAge.setText("Age : ");
+        txtLblAge.setText(R.string.age);
 
 
+        // set tue values from the intent into the textview
         TextView txtUser = (TextView) findViewById(R.id.textView4);
         txtUser.setText(nom);
 
@@ -82,8 +81,10 @@ public class show_ornitho extends AppCompatActivity {
 
     public void edit (View view) {
 
+        // create intent to go in the editOrnitho_class
         Intent intent = new Intent(show_ornitho.this, edit_ornitho.class);
 
+        // take the values
         TextView txtUsername = (TextView) findViewById(R.id.textView4);
         String username = txtUsername.getText().toString();
 
@@ -94,13 +95,15 @@ public class show_ornitho extends AppCompatActivity {
         String age = txtAge.getText().toString();
 
 
+        // set the values into the intent
         intent.putExtra("username", username);
         intent.putExtra("canton", canton);
         intent.putExtra("age", age);
-        intent.putExtra("password",password);
+        intent.putExtra("password","");
         intent.putExtra("id", getIdf()+"" );
         intent.putExtra("ID_USER", ID_USER);
 
+        // startActivity
         startActivity(intent);
     }
 

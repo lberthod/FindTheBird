@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         //methodes pour remplir ou vider les tables
 
         //deleteObservation();
@@ -50,29 +49,23 @@ public class MainActivity extends AppCompatActivity {
 
         //Extract the strings
         ID_USER = intent.getIntExtra("ID_USER",0);
-
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Log.d("ID_USER", ID_USER+"--");
-    }
-
-
+    // suppression des oiseaux
     private void deleteOiseau() {
         for (int i = 0 ; i< 100 ; i++){
             oDB.deleteOiseau(i);
         }
-
     }
 
+    // suppressions des ornitholgoues
     private void deleteOrnitho() {
         for (int i = 0 ; i< 100 ; i++){
             rDB.deleteOrnitho(i);
         }
     }
 
+    // suppressions des observations
     private void deleteObservation() {
         for (int i = 0 ; i< 100 ; i++){
             bDB.deleteObservation(i);
@@ -103,10 +96,11 @@ public class MainActivity extends AppCompatActivity {
     public void OpenParam (View view) {
 
         Intent intent = new Intent(this, HomeParam.class);
+        intent.putExtra("ID_USER" , ID_USER);
+
 
         startActivity(intent);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -120,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.butParam:
                 intent = new Intent(this, HomeParam.class);
                 this.startActivity(intent);
+                intent.putExtra("ID_USER" , ID_USER);
                 break;
 
             default:
@@ -129,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    // create some birds
     public void creationOiseau(){
 
         // inserting oiseaux
@@ -139,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // create some ornithos
     public void creationOrnitho(){
 
         // inserting ornitho
@@ -149,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // create some observations
     public void creationObservations(){
 
         // inserting observations
@@ -159,4 +157,5 @@ public class MainActivity extends AppCompatActivity {
         bDB.createObservation(1, 4,"Il miauler");
 
     }
+
 }

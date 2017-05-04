@@ -45,12 +45,6 @@ public class HomeOrnithologue extends AppCompatActivity {
         afficherListeOrni();
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Log.d("ID_USER", ID_USER+"--");
-    }
-
     private void afficherListeOrni() {
         List<Ornithologue> ornis = rDB.getAllOrnithos();
 

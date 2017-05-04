@@ -25,6 +25,7 @@ public class edit_oiseau extends AppCompatActivity {
     OiseauDB oDB = new OiseauDB(this);
     Button butOK;
     String id = null;
+    private int ID_USER;
 
 
     @Override
@@ -32,6 +33,7 @@ public class edit_oiseau extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_oiseau);
 
+        // initialise a button from the layout
         butOK = (Button) findViewById(R.id.butOk);
 
         butOK.setOnClickListener(new View.OnClickListener() {
@@ -39,14 +41,17 @@ public class edit_oiseau extends AppCompatActivity {
             public void onClick(View v) {
                 EditText tnom , ttext, tpoids,ttaille;
 
+                // create a spinner for the color choice
                 Spinner mySpinner=(Spinner) findViewById(R.id.editText3);
                 String color = mySpinner.getSelectedItem().toString();
 
+                // initialize the editext from the layout
                 tnom =  (EditText)  findViewById(R.id.editText1);
                 ttext = (EditText)  findViewById(R.id.editText4);
                 tpoids = (EditText)   findViewById(R.id.editText5);
                 ttaille = (EditText)   findViewById(R.id.editText2);
 
+                // create a bird and add values
                 Oiseau o = new Oiseau();
                 o.setId(Integer.parseInt(id));
                 o.setText(ttext.getText().toString());
@@ -55,24 +60,29 @@ public class edit_oiseau extends AppCompatActivity {
                 o.setPoids(tpoids.getText().toString());
                 o.setTaille(ttaille.getText().toString());
 
-
+                // update the birds
                 oDB.updateOiseau(o);
 
 
+                // change the view
                 Intent intent = new Intent(edit_oiseau.this , HomeOiseaux.class);
+                finish();
+                intent.putExtra("ID_USER" , ID_USER);
 
                 startActivity(intent);
             }
         });
 
+        // create the colors array list
         ArrayList<String>colors = new ArrayList<String>();
         Spinner spinnerColor = (Spinner) findViewById(R.id.editText3);
 
-
+        // add the color into the array list
         for (String c : oDB.colorss){
             colors.add(c);
         }
 
+        // put the colors into the spinner
         ArrayAdapter<String> adapterColors = new ArrayAdapter<String>
               (this, android.R.layout.simple_spinner_item, colors);
         spinnerColor.setAdapter(adapterColors);
@@ -83,30 +93,31 @@ public class edit_oiseau extends AppCompatActivity {
 
         //Extract the strings
         id = intent.getStringExtra("id");
-        Log.d("---------------",id+"");
         String nom = intent.getStringExtra("nom");
         String text = intent.getStringExtra("text");
         String color = intent.getStringExtra("color");
         String taille = intent.getStringExtra("taille");
         String poids = intent.getStringExtra("poids");
+        ID_USER = intent.getIntExtra("ID_USER",0);
 
 
-        //Set the values
+        //Set the labels
         TextView txtLblNom = (TextView) findViewById(R.id.textView1);
-        txtLblNom.setText("Nom : ");
+        txtLblNom.setText(R.string.nom);
 
         TextView txtLblTaille = (TextView) findViewById(R.id.textView4);
-        txtLblTaille.setText("Taille : ");
+        txtLblTaille.setText(R.string.taille);
 
         TextView txtLblPoids = (TextView) findViewById(R.id.textView5);
-        txtLblPoids.setText("Poids : ");
+        txtLblPoids.setText(R.string.poids);
 
         TextView txtLblColor = (TextView) findViewById(R.id.textView3);
-        txtLblColor.setText("Color : ");
+        txtLblColor.setText(R.string.couleur);
 
         TextView txtLblText = (TextView) findViewById(R.id.textView2);
-        txtLblText.setText("Description : ");
+        txtLblText.setText(R.string.descritpion);
 
+        // set the values into the editext
         EditText txtNom = (EditText) findViewById(R.id.editText1);
         txtNom.setText(nom);
 
@@ -123,14 +134,8 @@ public class edit_oiseau extends AppCompatActivity {
         txtText.setText(text);
     }
 
-   // private void setWineLotField() {
-   //     String currentColor = (String) spinnerOrientation.getSelectedItem();
-    //}
-
-
     public void Retour (View view) {
         finish();
     }
-
 
 }

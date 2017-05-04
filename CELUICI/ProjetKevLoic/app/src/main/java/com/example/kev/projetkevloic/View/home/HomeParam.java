@@ -12,11 +12,19 @@ import java.util.Locale;
 
 public class HomeParam extends AppCompatActivity {
 
-// TESTNHOME PARA
+
+    private int ID_USER;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_param);
+
+        //Get the intent
+        Intent intent = getIntent();
+
+        //Extract the strings
+        ID_USER = intent.getIntExtra("ID_USER",0);
+
     }
         //Button pour passer en FR
 
@@ -31,6 +39,8 @@ public class HomeParam extends AppCompatActivity {
 
                 Intent intent = new Intent(HomeParam.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("ID_USER" , ID_USER);
+
                 startActivity(intent);
 
             }
@@ -48,6 +58,7 @@ public class HomeParam extends AppCompatActivity {
 
                 Intent intent = new Intent(HomeParam.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("ID_USER" , ID_USER);
                 startActivity(intent);
             }
 
@@ -64,6 +75,7 @@ public class HomeParam extends AppCompatActivity {
 
                 Intent intent = new Intent(HomeParam.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("ID_USER" , ID_USER);
                 startActivity(intent);
             }
 

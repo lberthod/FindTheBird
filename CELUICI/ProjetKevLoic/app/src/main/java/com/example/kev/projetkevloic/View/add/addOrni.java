@@ -23,10 +23,18 @@ public class addOrni extends AppCompatActivity {
     Button bOK;
     OrnithoDB rDB = new OrnithoDB(this);
 
+    private int ID_USER;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_orni);
+
+        //Get the intent
+        Intent intent = getIntent();
+
+        //Extract the strings
+        ID_USER = intent.getIntExtra("ID_USER",0);
 
         ArrayList<String> cantons = new ArrayList<String>() ;
         for (String c : rDB.cantons){
@@ -60,6 +68,7 @@ public class addOrni extends AppCompatActivity {
                         canton);
 
                 Intent intent = new Intent(addOrni.this , Login.class);
+                intent.putExtra("ID_USER" , ID_USER);
 
                 startActivity(intent);
             }

@@ -25,17 +25,37 @@ public class addOiseau extends AppCompatActivity {
     OiseauDB oDB = new OiseauDB(this);
 
 
+    private int ID_USER;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_oiseau);
 
+        // create a array list, an adapater to create a spinner for the colors
         ArrayList<String> colors = new ArrayList<String>();
         Spinner spinnerColor = (Spinner) findViewById(R.id.editText7);
 
+        for (String c : oDB.colorss){
+            colors.add(c);
+        }
+
+        ArrayAdapter<String> adapterColors = new ArrayAdapter<String>
+                (this, android.R.layout.simple_spinner_item, colors);
+        spinnerColor.setAdapter(adapterColors);
+
+
+        //Get the intent
+        Intent intent = getIntent();
+
+        //Extract the strings
+        ID_USER = intent.getIntExtra("ID_USER",0);
+
+        // create a button from the layout
         bOK = (Button) findViewById(R.id.button5) ;
 
+        // add the action to add a bird
         bOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,42 +73,18 @@ public class addOiseau extends AppCompatActivity {
                 oDB.createOiseau(tnom.getText().toString(), color,tpoids.getText().toString(), ttaille.getText().toString(), ttext.getText().toString() );
 
                 Intent intent = new Intent(addOiseau.this , HomeOiseaux.class);
-
+                intent.putExtra("ID_USER" , ID_USER);
                 startActivity(intent);
             }
         });
 
-        for (String c : oDB.colorss){
-            colors.add(c);
-        }
 
-        ArrayAdapter<String> adapterColors = new ArrayAdapter<String>
-                (this, android.R.layout.simple_spinner_item, colors);
-        spinnerColor.setAdapter(adapterColors);
     }
-
-//    public  void okForAdd(){
-//
-//        TextView txtNom = (TextView) findViewById(R.id.textView4);
-//        String nom = txtNom.getText().toString();
-//
-//        TextView txttaille = (TextView) findViewById(R.id.textView7);
-//        String taille = txttaille.getText().toString();
-//
-//        TextView txtPoids = (TextView) findViewById(R.id.textView5);
-//        String poids = txtPoids.getText().toString();
-//
-//        Spinner spinnerColor = (Spinner) findViewById(R.id.editText3);
-//        spinnerColor.setSelection(0);
-//
-//        TextView txtText = (TextView) findViewById(R.id.textView2);
-//        String text = txtText.getText().toString();
-//
-//    }
-
-
-
-
-
-
 }
+
+
+
+
+
+
+

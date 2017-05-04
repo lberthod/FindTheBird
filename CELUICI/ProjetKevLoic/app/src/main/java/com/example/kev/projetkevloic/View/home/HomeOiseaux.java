@@ -89,6 +89,7 @@ public class HomeOiseaux extends AppCompatActivity {
             case R.id.AddButton:
                 finish();
                 intent = new Intent(this, addOiseau.class);
+                intent.putExtra("ID_USER" , ID_USER);
 
                 this.startActivity(intent);
                 break;

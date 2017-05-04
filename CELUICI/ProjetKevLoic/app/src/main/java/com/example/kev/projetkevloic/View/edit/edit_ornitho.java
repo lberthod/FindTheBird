@@ -27,32 +27,37 @@ public class edit_ornitho extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_ornitho);
 
+        // initalize a button from the layout
         butOK = (Button) findViewById(R.id.button5);
 
+        // add an action in the button ( edit a ornithologue)
         butOK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+
+            @Override public void onClick(View v) {
                 EditText tusername , tpassword, tage ,tcanton;
 
+                // take the values in the editexts from the layout
                 tusername =  (EditText)  findViewById(R.id.editText1);
                 tpassword =  (EditText)  findViewById(R.id.editText4);
                 tage =  (EditText)  findViewById(R.id.editText3);
                 tcanton =  (EditText)  findViewById(R.id.editText2);
 
+                // create a ornitho and add values
                 Ornithologue o = new Ornithologue();
                 int idOk = Integer.parseInt(id);
-                Log.d("-----------", idOk+"");
                 o.setId(idOk);
                 o.setUsername(tusername.getText().toString());
                 o.setPassword(tpassword.getText().toString());
                 o.setAge(tage.getText().toString());
                 o.setCanton(tcanton.getText().toString());
 
+                // update the ornitho into the db
                 rDB.updateOrnitho(o);
 
+                // move to the homeOrnitho view
                 Intent intent = new Intent(edit_ornitho.this , HomeOrnithologue.class);
                 intent.putExtra("ID_USER", ID_USER);
-
+                finish();
                 startActivity(intent);
             }
         });
@@ -68,21 +73,20 @@ public class edit_ornitho extends AppCompatActivity {
         id = intent.getStringExtra("id");
         ID_USER = intent.getIntExtra("ID_USER",0);
 
-
-        //Set the values
+        //Set the labels
         TextView txtLblNom = (TextView) findViewById(R.id.textView1);
-        txtLblNom.setText("Username : ");
+        txtLblNom.setText(R.string.username);
 
         TextView txtLblprenom = (TextView) findViewById(R.id.textView2);
-        txtLblprenom.setText("Canton: ");
+        txtLblprenom.setText(R.string.canton);
 
         TextView txtLblAge = (TextView) findViewById(R.id.textView3);
-        txtLblAge.setText("Age : ");
+        txtLblAge.setText(R.string.age);
 
         TextView txtLblPassword = (TextView) findViewById(R.id.textView4);
-        txtLblPassword.setText("Password: ");
+        txtLblPassword.setText(R.string.password);
 
-
+        // set the values into the edittext
         EditText txtUsername = (EditText) findViewById(R.id.editText1);
         txtUsername.setText(username);
 
@@ -94,8 +98,6 @@ public class edit_ornitho extends AppCompatActivity {
 
         EditText txtPassword = (EditText) findViewById(R.id.editText4);
         txtPassword.setText(password);
-
-
     }
 
 

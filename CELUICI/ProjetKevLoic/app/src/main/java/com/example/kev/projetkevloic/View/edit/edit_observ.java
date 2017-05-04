@@ -28,6 +28,8 @@ public class edit_observ extends AppCompatActivity {
     private String text, orniN, oiseauN;
     EditText txtText;
 
+    private int ID_USER;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +45,7 @@ public class edit_observ extends AppCompatActivity {
         orniN = intent.getStringExtra("orniName");
         oiseauN = intent.getStringExtra("oiseauName");
         id = intent.getIntExtra("id",0);
+        ID_USER = intent.getIntExtra("ID_USER",0);
 
 
         butOK = (Button) findViewById(R.id.butOK);
@@ -61,6 +64,8 @@ public class edit_observ extends AppCompatActivity {
                 bDB.updateObservation(o);
 
                 Intent intent = new Intent(edit_observ.this , HomeObservations.class);
+                finish();
+                intent.putExtra("ID_USER" , ID_USER);
 
                 startActivity(intent);
 
@@ -78,13 +83,6 @@ public class edit_observ extends AppCompatActivity {
         TextView txtLblText = (TextView) findViewById(R.id.textView3);
         txtLblText.setText("text : ");
 
-
-
-//        EditText txtOrni = (EditText) findViewById(R.id.editText1);
-//        txtOrni.setText(orni);
-//
-//        EditText txtOiseau = (EditText) findViewById(R.id.editText2);
-//        txtOiseau.setText(oiseau);
 
         txtText = (EditText) findViewById(R.id.editText3);
         txtText.setText(text);

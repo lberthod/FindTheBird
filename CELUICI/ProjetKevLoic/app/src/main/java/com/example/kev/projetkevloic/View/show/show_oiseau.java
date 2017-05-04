@@ -22,19 +22,13 @@ import java.util.ArrayList;
 public class show_oiseau extends AppCompatActivity {
 
     OiseauDB oDB ;
-    private String idf;
+    private String idf; // permet de resortir l'ID de l'oiseau
     private int ID_USER ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_oiseau);
-        ArrayList<String> colors = new ArrayList<String>();
-
-
-        for (String i : colors) {
-            colors.add(i);
-        }
 
         //Get the intent
         Intent intent = getIntent();
@@ -49,34 +43,33 @@ public class show_oiseau extends AppCompatActivity {
         ID_USER  = intent.getIntExtra("ID_USER", 0);
         Log.d("ID_USERR : " , ID_USER+"");
 
-        // check if the user is the user, if yes we can edit
+        // check if the user is the admin, if yes we can edit
         if(ID_USER != 1){
             Button butEdit;
             butEdit = (Button) findViewById(R.id.button6);
-
             butEdit.setVisibility(View.INVISIBLE);
         }
 
-
         setIdf(String.valueOf(id_));
 
-        //Set the values
+        //Set the title into the textview
         TextView txtLblNom = (TextView) findViewById(R.id.textView1);
-        txtLblNom.setText("Nom : ");
+        txtLblNom.setText(R.string.nom);
 
         TextView txtLblTaille = (TextView) findViewById(R.id.textView2);
-        txtLblTaille.setText("Taille : ");
+        txtLblTaille.setText(R.string.taille);
 
         TextView txtLblPoids = (TextView) findViewById(R.id.textView3);
-        txtLblPoids.setText("Poids : ");
+        txtLblPoids.setText(R.string.poids);
 
         TextView txtLblColor = (TextView) findViewById(R.id.textView4);
-        txtLblColor.setText("Color : ");
+        txtLblColor.setText(R.string.couleur);
 
         TextView txtLblText = (TextView) findViewById(R.id.textView5);
-        txtLblText.setText("Description : ");
+        txtLblText.setText(R.string.descritpion);
 
 
+        // set tue values from the intent into the textview
         TextView txtNom = (TextView) findViewById(R.id.textView6);
         txtNom.setText(nom);
 
@@ -100,32 +93,24 @@ public class show_oiseau extends AppCompatActivity {
 
     public void Modify(View view) {
 
+        // create intent to go in the editObserv_class
+
         Intent intent = new Intent(show_oiseau.this, edit_oiseau.class);
 
+        // take the informations and add to the intent
         TextView txtNom = (TextView) findViewById(R.id.textView6);
-        String nom = txtNom.getText().toString();
-
-
         TextView txttaille = (TextView) findViewById(R.id.textView7);
-        String taille = txttaille.getText().toString();
-
         TextView txtPoids = (TextView) findViewById(R.id.textView8);
-        String poids = txtPoids.getText().toString();
-
-
         TextView txtColor = (TextView) findViewById(R.id.textView11);
-        String color = txtPoids.getText().toString();
-
         TextView txtText = (TextView) findViewById(R.id.textView10);
-        String text = txtText.getText().toString();
 
-        intent.putExtra("nom", nom);
-        intent.putExtra("text", text);
-        intent.putExtra("color", color);
-        intent.putExtra("poids", poids);
-        intent.putExtra("taille", taille);
+        intent.putExtra("nom", txtNom.getText().toString());
+        intent.putExtra("text", txtText.getText().toString());
+        intent.putExtra("color", txtPoids.getText().toString());
+        intent.putExtra("poids", txtPoids.getText().toString());
+        intent.putExtra("taille", txttaille.getText().toString());
         intent.putExtra("id", getIdf() );
-
+        intent.putExtra("ID_USER" , ID_USER);
 
         startActivity(intent);
     }
@@ -148,12 +133,15 @@ public class show_oiseau extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()) {
             case R.id.butDelete:
+
+                // create a intent to go to home with and delete a bird
                 intent = new Intent(this, HomeOiseaux.class);
                 int ID = Integer.parseInt(idf);
-
                 oDB = new OiseauDB(this);
                 oDB.deleteOiseau(ID);
+                intent.putExtra("ID_USER" , ID_USER);
                 this.startActivity(intent);
+
                 break;
 
             default:

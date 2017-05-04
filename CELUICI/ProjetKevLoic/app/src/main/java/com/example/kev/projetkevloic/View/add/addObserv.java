@@ -58,11 +58,10 @@ public class addObserv extends AppCompatActivity {
         tOrnitho.setText(orn);
 
 
-
-
-
+        // create a button from the layout
         butOk = (Button) findViewById(R.id.button5) ;
 
+        // add the action to add an observation
         butOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +75,7 @@ public class addObserv extends AppCompatActivity {
                 bDB.createObservation(oDB.getIdByName(oiseau),1,Ttext.getText().toString());
 
                 Intent intent = new Intent(addObserv.this , HomeObservations.class);
-
+                intent.putExtra("ID_USER" , ID_USER);
                 startActivity(intent);
 
             }
